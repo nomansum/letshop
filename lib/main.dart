@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:letshop/constants/global_variables.dart';
+import 'package:letshop/features/auth/BusinessLogic/bloc/authentication_bloc.dart';
+import 'package:letshop/features/auth/Data/Repository/auth_repository.dart';
 import 'package:letshop/router.dart';
 
 void main() {
-  runApp(const MyApp());
+  final authRepository = AuthRepository();
+
+  runApp(BlocProvider(
+    create: (context) => AuthenticationBloc(authRepository: authRepository),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
